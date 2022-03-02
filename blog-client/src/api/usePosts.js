@@ -11,7 +11,7 @@ export default function usePosts() {
     const fetchPost = async (slug) => {  
         let response = await axios.get(`/api/posts/${slug}`)
         post.value = response.data.data 
-    }
+    }  
     return {
         posts,
         post,

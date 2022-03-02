@@ -12,8 +12,13 @@ export default function useAdminPosts() {
         let response = await axios.get(`/api/admin/posts/${slug}`)
         post.value = response.data.data 
     }
+    const createPost = async () => {  
+       let response = await axios.post('/api/admin/posts')
+       return response.data.data
+    }
     return {
         posts,
+        createPost,
         post,
         fetchPost,
         fetchPosts
