@@ -2,6 +2,9 @@ import {createRouter, createWebHistory} from 'vue-router'
 import Home from '../pages/Home.vue'
 import Post from '../pages/Post.vue'
 import Login from '../pages/Login.vue'
+import Posts from '../pages/admin/Posts.vue'
+import store from '../store'
+
 const routes = [
     {
         path: '/',
@@ -16,8 +19,25 @@ const routes = [
     },
     {
         path: '/admin/login',
-        name: 'login',
-        component: Login
+        name: 'admin.login',
+        component: Login,
+        beforeEnter: (to, from, next) => {
+            if(!store.getters.authenticated) {
+                return next()
+            }
+            return next({name: 'admin.posts'})
+        }
+    },
+    {
+        path: '/admin/posts',
+        name: 'admin.posts',
+        component: Posts,
+        beforeEnter: (to, from, next) => {
+            if(store.getters.authenticated) {
+                return next()
+            }
+            return next({name: 'admin.login'})
+        }
     }
 ]
 export default createRouter({
