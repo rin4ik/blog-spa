@@ -33,6 +33,7 @@ const routes = [
         path: '/admin/posts/:slug/edit',
         name: 'admin.posts.edit',
         component: Edit,
+        props: true,
         beforeEnter: (to, from, next) => {
             if(store.getters.authenticated) {
                 return next()

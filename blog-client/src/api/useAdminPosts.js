@@ -9,15 +9,20 @@ export default function useAdminPosts() {
         posts.value = response.data.data
     }
     const fetchPost = async (slug) => {  
-        let response = await axios.get(`/api/admin/posts/${slug}`)
+        let response = await axios.get(`/api/admin/posts/${slug}/edit`)
         post.value = response.data.data 
     }
+    const patchPost = async (uuid) => {   
+        await axios.patch(`/api/admin/posts/${uuid}`, post.value)
+    }
+    
     const createPost = async () => {  
        let response = await axios.post('/api/admin/posts')
        return response.data.data
     }
     return {
         posts,
+        patchPost,
         createPost,
         post,
         fetchPost,
