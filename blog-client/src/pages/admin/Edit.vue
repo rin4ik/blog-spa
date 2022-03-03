@@ -21,16 +21,18 @@
                 </template>
             </ResizeTextarea>
         </div>
+        <Editor v-model="post.body" class="mt-16" />
     </div>
 </template>
 <script> 
 import { onMounted, watch, watchEffect } from 'vue'
 import usePosts from '../../api/useAdminPosts'
 import ResizeTextarea from '../../components/ResizeTextarea.vue'
+import Editor from '../../components/Editor.vue'
 import {cloneDeep, debounce} from 'lodash' 
 import slugify from 'slugify'
 export default({ 
-    components: { ResizeTextarea },
+    components: { ResizeTextarea, Editor },
     props: {
         uuid: {
             required: true,

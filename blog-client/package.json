@@ -10,6 +10,8 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/typography": "^0.5.2",
+    "@tiptap/starter-kit": "^2.0.0-beta.183",
+    "@tiptap/vue-3": "^2.0.0-beta.90",
     "axios": "^0.26.0",
     "lodash": "^4.17.21",
     "slugify": "^1.6.5",
