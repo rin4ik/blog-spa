@@ -17,7 +17,7 @@
                         </span> 
                     </p>
                     <div> 
-                        <router-link :to="{ name: 'admin.posts.edit', params: { slug: post.uuid }}" class="text-sm font-medium">Edit</router-link>
+                        <router-link :to="{ name: 'admin.posts.edit', params: { uuid: post.uuid }}" class="text-sm font-medium">Edit</router-link>
                     </div>
                     <div>
                         <button @click.prevent="deletePost(post.uuid)" class="text-sm font-medium">Delete</button>

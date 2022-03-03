@@ -30,7 +30,7 @@ const routes = [
         }
     },
     {
-        path: '/admin/posts/:slug/edit',
+        path: '/admin/posts/:uuid/edit',
         name: 'admin.posts.edit',
         component: Edit,
         props: true,

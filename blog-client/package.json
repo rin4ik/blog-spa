@@ -12,6 +12,7 @@
     "@tailwindcss/typography": "^0.5.2",
     "axios": "^0.26.0",
     "lodash": "^4.17.21",
+    "slugify": "^1.6.5",
     "vue": "^3.2.25",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2"
