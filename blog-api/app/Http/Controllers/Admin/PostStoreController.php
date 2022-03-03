@@ -15,7 +15,7 @@ class PostStoreController extends Controller
     public function __invoke()
     {
        $post = Post::create([
-            'title' => 'Untitled'
+            'title' => 'Untitled Post'
        ]);
        return new PostResource($post);
     }

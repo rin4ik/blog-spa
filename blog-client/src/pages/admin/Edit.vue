@@ -8,7 +8,9 @@
                 <div>
                     <span class="text-sm text-gray-500">Autosaved</span>
                 </div>
-                <button class="text-sm font-medium">Published</button>
+                <button @click="post.published = !post.published" class="text-sm font-medium" :class="{'text-pink-500': post.published}">
+                    {{!post.published ? 'Publish' : 'Unpublish'}}
+                </button>
                 <router-link v-if="post.slug" :to="{ name: 'post', params: { slug: post.slug }}"  class="text-sm font-medium text-gray-800">Preview</router-link>
             </div>
         </div>
