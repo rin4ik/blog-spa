@@ -45,7 +45,9 @@ export default ({
         const errors = ref({})
         const attemptLogin = () => {
             store.dispatch('login', form)
-            .then(() => router.replace({name: 'admin.posts'}))
+            .then(() => { 
+                 router.replace({name: 'admin.posts'})
+            })
             .catch((e) => {
                 if(e.response.status === 422)
                 errors.value = e.response.data.errors 

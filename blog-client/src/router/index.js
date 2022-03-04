@@ -44,7 +44,7 @@ const routes = [
     {
         path: '/admin/posts',
         name: 'admin.posts',
-        component: Posts,
+        component: Posts,    
         beforeEnter: (to, from, next) => {
             if(store.getters.authenticated) {
                 return next()

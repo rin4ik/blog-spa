@@ -5,9 +5,11 @@
                 <span class="mr-1">/</span> <input spellcheck="false" @click="$event.target.select()" type="text" v-model="post.slug" class="p-0 border-none focus:ring-0 w-full"> 
             </div>
             <div class="flex items-center space-x-6">
-                <div>
-                    <span class="text-sm text-gray-500">Autosaved</span>
-                </div>
+                <RelativeTime :date="lastSaved" v-if="lastSaved">
+                    <template v-slot:default="{ fromNow }">
+                        <span class="text-sm text-gray-500">{{fromNow}}</span>
+                    </template>
+                </RelativeTime>
                 <button @click="post.published = !post.published" class="text-sm font-medium" :class="{'text-pink-500': post.published}">
                     {{!post.published ? 'Publish' : 'Unpublish'}}
                 </button>
@@ -21,7 +23,7 @@
                 </template>
             </ResizeTextarea>
         </div>
-        <Editor v-model="post.body" class="mt-16" />
+        <Editor v-model:modelValue="post.body" v-model:teaserValue="post.teaser" class="mt-16" />
     </div>
 </template>
 <script> 
@@ -29,10 +31,14 @@ import { onMounted, watch, watchEffect } from 'vue'
 import usePosts from '../../api/useAdminPosts'
 import ResizeTextarea from '../../components/ResizeTextarea.vue'
 import Editor from '../../components/Editor.vue'
+import RelativeTime from '../../components/RelativeTime.vue' 
 import {cloneDeep, debounce} from 'lodash' 
 import slugify from 'slugify'
+import {ref} from 'vue'
+import dayjs from 'dayjs'
+
 export default({ 
-    components: { ResizeTextarea, Editor },
+    components: { ResizeTextarea, Editor, RelativeTime },
     props: {
         uuid: {
             required: true,
@@ -41,8 +47,11 @@ export default({
     },
     setup(props) {   
         const { post, fetchPost, patchPost } = usePosts() 
+        const lastSaved = ref(null)
+
         const updatePost = async () => {
             await patchPost(props.uuid) 
+            lastSaved.value = dayjs()
         }
         const replaceSlug = () => {
             const slug = post.value.slug
@@ -61,7 +70,8 @@ export default({
             }, 500))
         })
         return {
-            post
+            post,
+            lastSaved
         }
     },
 })

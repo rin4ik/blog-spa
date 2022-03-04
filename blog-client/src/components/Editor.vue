@@ -13,6 +13,10 @@ export default ({
         modelValue: {
             type: String,
             default: ''
+        },
+        teaserValue: {
+            type: String,
+            default: ''
         }
     },
     setup(props, {emit}) { 
@@ -27,6 +31,10 @@ export default ({
                 }
             },
             onUpdate: (context) => {
+                const teaser = context.editor.state.doc.content.content
+                    .find(c => c.type.name === 'paragraph')
+                    .textContent
+                emit('update:teaserValue', teaser)
                 emit('update:modelValue', context.editor.getHTML())
             }
         }) 

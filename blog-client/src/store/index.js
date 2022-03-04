@@ -36,7 +36,7 @@ export default createStore({
         async login({dispatch}, credentials) {
             await axios.get('/sanctum/csrf-cookie')
             await axios.post('/login', credentials)
-            dispatch('authenticate')
+            await dispatch('authenticate')
         }
     }
 })
