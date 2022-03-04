@@ -34,10 +34,14 @@ import {useRouter} from 'vue-router'
 
 export default({
     setup() {
-        const { posts, fetchPosts, createPost } = useAdminPosts() 
+        const { posts, fetchPosts, createPost, destroyPost } = useAdminPosts() 
         const router = useRouter(); 
-        function deletePost(uuid) {
-            console.log(uuid)
+        const deletePost = async (uuid) => {
+            if(!window.confirm('You sure ?')) {
+                return;
+            } 
+            await destroyPost(uuid)
+            posts.value = posts.value.filter(p => p.uuid !== uuid)
         }
         const newPost = async () => {
             let post = await createPost()

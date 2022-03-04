@@ -3,6 +3,7 @@ use App\Http\Controllers\Admin\PostPatchController as AdminPostPatchController;
 use App\Http\Controllers\Admin\PostEditController as AdminPostEditController;
 use App\Http\Controllers\Admin\PostIndexController as AdminPostIndexController;
 use App\Http\Controllers\Admin\PostStoreController as  AdminPostStoreController;
+use App\Http\Controllers\Admin\PostDestroyController as  AdminPostDestroyController;  
 use App\Http\Controllers\PostIndexController; 
 use App\Http\Controllers\PostShowController;
 use Illuminate\Http\Request;
@@ -23,9 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/posts', PostIndexController::class);
-Route::get('/posts/{post:slug}', PostShowController::class);
+Route::get('/posts/{post:uuid}', PostShowController::class);
 Route::get('/admin/posts', AdminPostIndexController::class);
 Route::post('/admin/posts',  AdminPostStoreController::class);
 Route::get('/admin/posts/{post:uuid}/edit',  AdminPostEditController::class);
 Route::patch('/admin/posts/{post:uuid}',  AdminPostPatchController::class);
+Route::delete('/admin/posts/{post:uuid}',  AdminPostDestroyController::class);
 
